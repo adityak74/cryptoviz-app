@@ -4,6 +4,7 @@ const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = (env, options) => ({
   entry: path.resolve(__dirname, './src/index.js'),
+  target: 'web',
   module: {
     rules: [
         {
