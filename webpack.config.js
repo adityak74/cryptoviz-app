@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DotenvPlugin = require('dotenv-webpack');
 const svgToMiniDataURI = require('mini-svg-data-uri');
 
 module.exports = (env, options) => ({
@@ -30,7 +31,7 @@ module.exports = (env, options) => ({
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   output: {
     path: path.resolve(__dirname, options.mode === 'production' ? './dist' : './public'),
@@ -46,6 +47,10 @@ module.exports = (env, options) => ({
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('./public/index.html'),
+    }),
+    new DotenvPlugin({
+      path: path.join(__dirname, `.env.${options.mode}`),
+      safe: true,
     }),
   ],
 });
